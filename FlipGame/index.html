@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Document</title>
+  <title>AI Image Flip Game</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="./asset/css/style.css" />
 </head>
@@ -71,8 +71,8 @@
               <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.3s]"></div>
               <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
             </div>
-            </div>
-            
+          </div>
+
         </div>
         <div v-else class="w-full h-full flex justify-center items-center bg-[#181818] text-[#ffffff] rounded-lg p-3">
           <div class="text-xl text-center font-bold tracking-wide" v-html="beforeStartMsg"></div>
@@ -81,9 +81,7 @@
 
     </div>
   </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
-    integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
-    crossorigin="anonymous"></script>
+  <script src="./plugins/lodash.js/lodash.min.js"></script>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script type="module" src="./asset/js/index.js"></script>
 </body>

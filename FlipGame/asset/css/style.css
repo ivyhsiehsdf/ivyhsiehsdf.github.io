@@ -1,0 +1,51 @@
+@charset "UTF-8";
+[v-cloak] {
+  display: none;
+}
+
+@keyframes scale-out-center {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+.loader {
+  height: 28px;
+  background: repeating-linear-gradient(-45deg, #6d9cf4 0 30px, rgba(0, 0, 0, 0) 0 40px) left/200% 100%;
+  border-radius: 10px;
+  border: 1px solid #6d9cf4;
+}
+.loader.sart {
+  animation: i3 6s infinite linear;
+}
+
+@keyframes i3 {
+  100% {
+    background-position: right;
+  }
+}
+.hide {
+  animation: scale-out-center 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.3s both;
+}
+
+.card {
+  transition: transform 0.5s;
+  background-color: transparent;
+  perspective: 1000px; /* 透視效果，提供3D視角 */
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.card.flip {
+  transform: rotateY(180deg);
+}
+.card .front {
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+}
+.card .back {
+  backface-visibility: hidden;
+}/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Document</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./asset/css/style.css" />
+</head>
+
+<body class="bg-slate-800">
+  <div id="app" class="container mx-auto flex flex-col md:flex-row h-screen pt-50 gap-10 p-5" v-cloak>
+    <div class="w-1/5 grid grid-rows-10 gap-4">
+      <button
+        class="bg-emerald-950 text-emerald-400 border border-emerald-400 border-b-4 font-medium overflow-hidden relative px-4 py-2 rounded-md hover:brightness-150 hover:border-t-4 hover:border-b active:opacity-75 outline-none duration-300 group disabled:opacity-70 disabled:cursor-default disabled:pointer-events-none"
+        :class="{'hidden':!isFirstStart}" v-on:click="starGame" :disabled="isStart">
+        <span
+          class="bg-emerald-400 shadow-emerald-400 absolute -top-[150%] left-0 inline-flex w-80 h-[5px] rounded-md opacity-50 group-hover:top-[150%] duration-500 shadow-[0_0_10px_10px_rgba(0,0,0,0.3)]"></span>
+        Play Game
+      </button>
+      <button
+        class="bg-blue-950 text-blue-400 border border-blue-400 border-b-4 font-medium overflow-hidden relative px-4 py-2 rounded-md hover:brightness-150 hover:border-t-4 hover:border-b active:opacity-75 outline-none duration-300 group disabled:opacity-70 disabled:cursor-default disabled:pointer-events-none"
+        :class="{'hidden':!isNextLevel}" v-on:click="starGame" :disabled="isStart">
+        <span
+          class="bg-blue-400 shadow-blue-400 absolute -top-[150%] left-0 inline-flex w-80 h-[5px] rounded-md opacity-50 group-hover:top-[150%] duration-500 shadow-[0_0_10px_10px_rgba(0,0,0,0.3)]"></span>
+        Next Level
+      </button>
+      <button
+        class="bg-blue-950 text-blue-400 border border-blue-400 border-b-4 font-medium overflow-hidden relative px-4 py-2 rounded-md hover:brightness-150 hover:border-t-4 hover:border-b active:opacity-75 outline-none duration-300 group disabled:opacity-70 disabled:cursor-default disabled:pointer-events-none"
+        :class="{'hidden':!isMaxLevel}" v-on:click="starGame" :disabled="isFinishGame ||isStart">
+        <span
+          class="bg-blue-400 shadow-blue-400 absolute -top-[150%] left-0 inline-flex w-80 h-[5px] rounded-md opacity-50 group-hover:top-[150%] duration-500 shadow-[0_0_10px_10px_rgba(0,0,0,0.3)]"></span>
+        Max Level
+      </button>
+    </div>
+    <div class="w-4/5 flex flex-col mx-auto gap-3">
+      <div class="bg-white rounded-[10px] h-auto">
+        <div class="loader" :class="{'sart':isStart && isLoading}" :style="{ width: progressBarWidth}"></div>
+      </div>
+      <div class="relative  flex-1 p-1.5 rounded-xl overflow-visible bg-gradient-to-l from-[#f7ba2b] to-[#ea5358] z-10">
+        <div
+          class="absolute top-7 left-0 right-0 h-full w-full transform scale-80 blur-xl bg-gradient-to-l from-[#f7ba2b] to-[#ea5358]  -z-10">
+        </div>
+        <div v-if="isStart" class="w-full h-full bg-[#181818] text-[#ffffff] rounded-lg p-3">
+          <div v-if="isLoading" class="w-full h-full">
+            <div v-if="!isGameOver" class="w-full h-full grid gap-3" :class="cardGridClass">
+              <div v-for="(card,index) in cardList" :class="{'hide':card.matched}">
+                <div class="card relative h-full rounded-md" :class="{'flip':card.flipped}"
+                  v-on:click="flipCard(index)">
+                  <div class="front absolute flex align-middle w-full h-full rounded-md bg-[#F8F8F8]">
+                    <img class="max-w-full max-h-full m-auto" :src="card.url" alt="" />
+                  </div>
+                  <div class="back absolute flex align-middle w-full h-full rounded-md bg-blue-700">
+                    <img class="w-full object-cover" src="./asset/image/card-bg.png" alt="card-back" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div v-else class="flex justify-center items-center w-full h-full">
+              <p class="font-bold tracking-wide">{{gameOverMsg}}</p>
+            </div>
+          </div>
+          <div v-else class="flex justify-center items-center w-full h-full">
+            <div class="flex justify-center items-center text-xl gap-2">
+              <div class="font-bold tracking-wide">
+                卡片加載中
+              </div>
+              <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
+              <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.3s]"></div>
+              <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
+            </div>
+            </div>
+            
+        </div>
+        <div v-else class="w-full h-full flex justify-center items-center bg-[#181818] text-[#ffffff] rounded-lg p-3">
+          <div class="text-xl text-center font-bold tracking-wide" v-html="beforeStartMsg"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
+    integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script type="module" src="./asset/js/index.js"></script>
+</body>
+
+</html>
